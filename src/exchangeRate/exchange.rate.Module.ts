@@ -7,6 +7,6 @@ import { ExchangeRateEntity } from "./entity/exchange.rate.entity";
 
 @Module({
     imports: [HttpModule, TypeOrmModule.forFeature([ExchangeRateEntity])],
-    providers: [ExchangeRateService, RequestService]
+    providers: [ExchangeRateService, RequestService],
 })
-export class ExchangeRateModule { }
+export class ExchangeRateModule {}

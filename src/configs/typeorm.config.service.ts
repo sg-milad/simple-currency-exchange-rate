@@ -20,7 +20,7 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
             database: this.dbConfig.database,
             synchronize: true,
             logging: false,
-            autoLoadEntities: true
+            autoLoadEntities: true,
             // migrationsRun: true,
             // migrations: ["dist/migrations/*migration.js"],
             // entities: ["dist/**/entities/*.entity.{js,ts}"],

@@ -1,7 +1,4 @@
-import {
-    Entity, PrimaryGeneratedColumn, Column,
-    BaseEntity, CreateDateColumn, UpdateDateColumn
-} from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn } from "typeorm";
 
 @Entity({ name: "exchange_rate" })
 export class ExchangeRateEntity extends BaseEntity {
@@ -11,7 +8,7 @@ export class ExchangeRateEntity extends BaseEntity {
     @Column({ name: "currency_symbol", type: "varchar" })
     currencySymbol: string;
 
-    @Column({ type: 'decimal' })
+    @Column({ type: "decimal" })
     rate: number; //  currency rate to USD
 
     @CreateDateColumn({ name: "created_at" })

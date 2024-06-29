@@ -6,9 +6,7 @@ export function ConfigModuleOptions(): ConfigModuleOptions {
     const options: ConfigModuleOptions = {};
     options.isGlobal = true;
     options.cache = true;
-    options.load = [
-        databaseConfig,
-    ];
+    options.load = [databaseConfig];
     if (!productionEnv()) {
         options.envFilePath = `.env.${process.env.NODE_ENV}`;
     }

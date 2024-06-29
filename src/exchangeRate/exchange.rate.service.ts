@@ -3,6 +3,5 @@ import { RequestService } from "./../shared/request/services/request.service";
 
 @Injectable()
 export class ExchangeRateService {
-    constructor(private requestService: RequestService) { }
-
+    constructor(private requestService: RequestService) {}
 }
