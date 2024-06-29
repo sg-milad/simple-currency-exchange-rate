@@ -15,7 +15,8 @@ import { ExchangeRateModule } from './exchangeRate/exchange.rate.Module';
       inject: [ConfigService],
       useClass: TypeOrmConfigService,
     }),
-    ExchangeRateModule],
+    ExchangeRateModule
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
