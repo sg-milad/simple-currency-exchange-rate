@@ -15,6 +15,7 @@ export class RequestService {
                     headers: requestInterface.header,
                     data: requestInterface.data,
                     method: requestInterface.method,
+                    timeout: 6000,
                 })
                 .pipe(
                     catchError((error) => {
