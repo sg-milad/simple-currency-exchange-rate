@@ -5,9 +5,9 @@ import { Injectable } from "@nestjs/common";
 
 @Injectable()
 export class RequestService {
-    constructor(private readonly httpService: HttpService) {}
+    constructor(private readonly httpService: HttpService) { }
 
-    async create(requestInterface: RequestInterface): Promise<any> {
+    async request(requestInterface: RequestInterface): Promise<any> {
         const { data } = await firstValueFrom(
             this.httpService
                 .request({
