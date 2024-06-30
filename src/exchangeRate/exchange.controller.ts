@@ -9,7 +9,7 @@ export class ExchangeRateController {
     ) { }
 
     @Get('convert')
-    async convert(@Query('from') data: ExchangeRateDto): Promise<number> {
+    async convert(@Query() data: ExchangeRateDto): Promise<number> {
         const { amount, fromCurrency, toCurrency } = data
         return await this.exchangeService.convert(fromCurrency, toCurrency, amount);
     }
