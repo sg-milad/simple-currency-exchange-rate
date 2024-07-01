@@ -5,11 +5,14 @@ export class ExchangeRateEntity extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ name: "currency_symbol", type: "varchar" })
-    currencySymbol: string;
+    @Column({ type: "varchar", name: "from_currency" })
+    fromCurrency: string
+
+    @Column({ type: "varchar", name: "to_currency" })
+    toCurrency: string
 
     @Column({ type: "decimal" })
-    rate: number; //  currency rate to USD
+    rate: number;
 
     @CreateDateColumn({ name: "created_at" })
     createdAt: Date;
