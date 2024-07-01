@@ -1,4 +1,4 @@
-### this project done for [arsonex](arsonex.com)
+### this project was done for [arsonex](arsonex.com)
 
 # NestJS ![nestjs32x32](https://github.com/imanhpr/nest-assignment/assets/56130647/facef099-7c17-4d9c-ae36-84265b05e31a) Currency Exchange Rate
 
