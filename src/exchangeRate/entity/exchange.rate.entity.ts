@@ -6,10 +6,10 @@ export class ExchangeRateEntity extends BaseEntity {
     id: number;
 
     @Column({ type: "varchar", name: "from_currency" })
-    fromCurrency: string
+    fromCurrency: string;
 
     @Column({ type: "varchar", name: "to_currency" })
-    toCurrency: string
+    toCurrency: string;
 
     @Column({ type: "decimal" })
     rate: number;

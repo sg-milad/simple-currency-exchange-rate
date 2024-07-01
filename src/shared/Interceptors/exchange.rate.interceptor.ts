@@ -1,6 +1,6 @@
-import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nestjs/common';
-import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from "@nestjs/common";
+import { Observable, of } from "rxjs";
+import { map } from "rxjs/operators";
 
 @Injectable()
 export class ExchangeRateInterceptor implements NestInterceptor {
@@ -10,10 +10,7 @@ export class ExchangeRateInterceptor implements NestInterceptor {
 
         if (fromCurrency === toCurrency) {
             return of({ amount: Number(amount) });
-
         }
-        return next.handle().pipe(
-            map(data => data)
-        );
+        return next.handle().pipe(map((data) => data));
     }
 }

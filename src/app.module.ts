@@ -20,4 +20,4 @@ import { ExchangeRateModule } from "./exchangeRate/exchange.rate.Module";
     controllers: [AppController],
     providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}

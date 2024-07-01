@@ -11,55 +11,54 @@ export class ExchangeRateService {
         private requestService: RequestService,
         @InjectRepository(ExchangeRateEntity)
         private readonly exchangeRepository: Repository<ExchangeRateEntity>,
-        private configService: ConfigService
-    ) { }
+        private configService: ConfigService,
+    ) {}
 
     async saveExchangeRate(exchangeRate: Partial<ExchangeRateEntity>) {
-        return await this.exchangeRepository.save(exchangeRate)
+        return await this.exchangeRepository.save(exchangeRate);
     }
 
     async fetchIrrToUsdRate() {
         try {
-            const apiKey = this.configService.get("apiKey.navasan")
+            const apiKey = this.configService.get("apiKey.navasan");
             const response = await this.requestService.request({
                 method: "GET",
                 url: `http://api.navasan.tech/latest/?api_key=${apiKey}`,
-            })
+            });
 
-            return await this.saveExchangeRate({ fromCurrency: "USD", toCurrency: "IRR", rate: response.usd.value })
+            return await this.saveExchangeRate({ fromCurrency: "USD", toCurrency: "IRR", rate: response.usd.value });
         } catch (error) {
-            throw new HttpException('Could not fetch IRR rate ', HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new HttpException("Could not fetch IRR rate ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     async fetchFiatExchangeRate(base: string, toCurrency: string) {
         try {
-            const apiKey = this.configService.get("apiKey.beacon")
+            const apiKey = this.configService.get("apiKey.beacon");
             const response = await this.requestService.request({
                 method: "GET",
                 url: `https://api.currencybeacon.com/v1/latest/?base=${base.toUpperCase()}&&api_key=${apiKey}`,
-            })
+            });
             return await this.saveExchangeRate({
                 fromCurrency: base.toUpperCase(),
                 toCurrency: toCurrency.toUpperCase(),
-                rate: response.rates[toCurrency.toUpperCase()]
-            })
-
+                rate: response.rates[toCurrency.toUpperCase()],
+            });
         } catch (error) {
-            throw new HttpException('Could not fetch rate', HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new HttpException("Could not fetch rate", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    async fetchCryptoCurrencyRate(fromCurrency: string, toCurrency: string = 'USDT') {
+    async fetchCryptoCurrencyRate(fromCurrency: string, toCurrency: string = "USDT") {
         try {
-            const apiKey = this.configService.get("apiKey.compare")
+            const apiKey = this.configService.get("apiKey.compare");
             const api = `https://min-api.cryptocompare.com/data/price?fsym=${fromCurrency}&tsyms=${toCurrency}`;
             const response = await this.requestService.request({
                 method: "GET",
                 url: api,
                 header: {
-                    'Accept': 'application/json',
-                    'Authorization': `Apikey ${apiKey}`,
+                    Accept: "application/json",
+                    Authorization: `Apikey ${apiKey}`,
                 },
-            })
+            });
 
             return await this.saveExchangeRate({
                 fromCurrency: fromCurrency.toUpperCase(),
@@ -67,7 +66,7 @@ export class ExchangeRateService {
                 rate: response[toCurrency.toUpperCase()],
             });
         } catch (error) {
-            throw new HttpException('Could not fetch cryptocurrency rate', HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new HttpException("Could not fetch cryptocurrency rate", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -80,8 +79,8 @@ export class ExchangeRateService {
             return rate.rate;
         };
 
-        if (fromCurrency === 'IRR' && toCurrency === 'USD') {
-            const rate = await fetchOrGetRate('USD', 'IRR');
+        if (fromCurrency === "IRR" && toCurrency === "USD") {
+            const rate = await fetchOrGetRate("USD", "IRR");
             return { amount: (1 / rate) * amount };
         }
 
@@ -90,22 +89,22 @@ export class ExchangeRateService {
     }
 
     async convertFiat(fromCurrency: string, toCurrency: string, amount: number) {
-        let getRate = await this.getRate(fromCurrency, toCurrency)
+        let getRate = await this.getRate(fromCurrency, toCurrency);
         if (!getRate) {
-            getRate = await this.fetchFiatExchangeRate(fromCurrency, toCurrency)
+            getRate = await this.fetchFiatExchangeRate(fromCurrency, toCurrency);
         }
-        return { amount: amount * getRate.rate }
+        return { amount: amount * getRate.rate };
     }
     async convertCryptoCurrency(fromCurrency: string, toCurrency: string, amount: number) {
-        let getRate = await this.getRate(fromCurrency, toCurrency)
+        let getRate = await this.getRate(fromCurrency, toCurrency);
         if (!getRate) {
-            getRate = await this.fetchCryptoCurrencyRate(fromCurrency, toCurrency)
+            getRate = await this.fetchCryptoCurrencyRate(fromCurrency, toCurrency);
         }
-        return { amount: amount * getRate.rate }
+        return { amount: amount * getRate.rate };
     }
 
     async getRate(fromCurrency: string, toCurrency: string) {
         const rate = await this.exchangeRepository.findOne({ where: { fromCurrency, toCurrency } });
-        return rate ?? null
+        return rate ?? null;
     }
 }

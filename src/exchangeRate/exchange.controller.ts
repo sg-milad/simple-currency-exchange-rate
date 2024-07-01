@@ -7,24 +7,22 @@ import { ExchangeRateInterceptor } from "src/shared/Interceptors/exchange.rate.i
 @Controller("/exchange/convert")
 @UseInterceptors(ExchangeRateInterceptor)
 export class ExchangeRateController {
-    constructor(
-        private exchangeService: ExchangeRateService
-    ) { }
+    constructor(private exchangeService: ExchangeRateService) {}
 
-    @Get('fiat/irr')
+    @Get("fiat/irr")
     async convertIrr(@Query() data: ExchangeRateIrrDto) {
-        const { amount, fromCurrency, toCurrency } = data
+        const { amount, fromCurrency, toCurrency } = data;
         return await this.exchangeService.convertIrr(fromCurrency, toCurrency, amount);
     }
-    @Get('fiat')
+    @Get("fiat")
     async convertFiat(@Query() data: ExchangeRateFiatDto) {
-        const { amount, fromCurrency, toCurrency } = data
+        const { amount, fromCurrency, toCurrency } = data;
         return await this.exchangeService.convertFiat(fromCurrency, toCurrency, amount);
     }
 
-    @Get('crypto')
+    @Get("crypto")
     async convertCryptoCurrency(@Query() data: ExchangeRateFiatDto) {
-        const { amount, fromCurrency, toCurrency } = data
+        const { amount, fromCurrency, toCurrency } = data;
         return await this.exchangeService.convertCryptoCurrency(fromCurrency, toCurrency, amount);
     }
 }

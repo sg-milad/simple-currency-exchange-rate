@@ -9,6 +9,6 @@ import { ExchangeRateController } from "./exchange.controller";
 @Module({
     imports: [HttpModule, TypeOrmModule.forFeature([ExchangeRateEntity])],
     providers: [ExchangeRateService, RequestService],
-    controllers: [ExchangeRateController]
+    controllers: [ExchangeRateController],
 })
-export class ExchangeRateModule { }
+export class ExchangeRateModule {}
