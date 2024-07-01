@@ -51,6 +51,9 @@ importers:
         specifier: ^0.3.17
         version: 0.3.20(pg@8.12.0)(ts-node@10.9.2(@types/node@20.14.9)(typescript@5.5.2))
     devDependencies:
+      '@golevelup/ts-jest':
+        specifier: ^0.5.0
+        version: 0.5.0
       '@nestjs/cli':
         specifier: ^10.0.0
         version: 10.3.2
@@ -90,6 +93,9 @@ importers:
       jest:
         specifier: ^29.5.0
         version: 29.7.0(@types/node@20.14.9)(ts-node@10.9.2(@types/node@20.14.9)(typescript@5.5.2))
+      jest-mock:
+        specifier: ^29.7.0
+        version: 29.7.0
       prettier:
         specifier: ^3.0.0
         version: 3.3.2
@@ -331,6 +337,9 @@ packages:
   '@eslint/js@8.57.0':
     resolution: {integrity: sha512-Ys+3g2TaW7gADOJzPt83SJtCDhMjndcDMFVQ/Tj9iA1BfJzFKD9mAUXT3OenpuPHbI6P/myECxRJrofUsDx/5g==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+
+  '@golevelup/ts-jest@0.5.0':
+    resolution: {integrity: sha512-UniUNOBraDD8vf6QNUPkpWMzhUXBtw40nCHekgBlaHy2p99MDV0aYLp4ZXifiyPOsFmg4BZQGs60lF6EpV7JpA==}
 
   '@humanwhocodes/config-array@0.11.14':
     resolution: {integrity: sha512-3T8LkOmg45BV5FICb15QQMsyUSWrQ8AygVfC7ZG32zOalnqrilm018ZVCw0eapXux8FtA33q8PSRSstjee3jSg==}
@@ -3372,6 +3381,8 @@ snapshots:
       - supports-color
 
   '@eslint/js@8.57.0': {}
+
+  '@golevelup/ts-jest@0.5.0': {}
 
   '@humanwhocodes/config-array@0.11.14':
     dependencies:
