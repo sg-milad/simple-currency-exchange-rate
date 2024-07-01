@@ -18,7 +18,7 @@ export class ExchangeRateService {
         return await this.exchangeRepository.save(exchangeRate)
     }
 
-    async fetchIRRToUsdRate() {
+    async fetchIrrToUsdRate() {
         try {
             const apiKey = this.configService.get("apiKey.navasan")
             const response = await this.requestService.request({
@@ -28,7 +28,7 @@ export class ExchangeRateService {
 
             return await this.saveExchangeRate({ fromCurrency: "USD", toCurrency: "IRR", rate: response.usd.value })
         } catch (error) {
-            throw new HttpException('Could not fetch IRR rate ', HttpStatus.BAD_REQUEST);
+            throw new HttpException('Could not fetch IRR rate ', HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     async fetchFiatExchangeRate(base: string, toCurrency: string) {
@@ -38,20 +38,14 @@ export class ExchangeRateService {
                 method: "GET",
                 url: `https://api.currencybeacon.com/v1/latest/?base=${base.toUpperCase()}&&api_key=${apiKey}`,
             })
-            const getToCurrencyRate = response.rates[toCurrency.toUpperCase()]
-
-            if (!getToCurrencyRate) {
-                throw new HttpException(`Could not fetch ${toCurrency.toUpperCase()}`, HttpStatus.NOT_FOUND);
-            }
-
             return await this.saveExchangeRate({
                 fromCurrency: base.toUpperCase(),
                 toCurrency: toCurrency.toUpperCase(),
-                rate: getToCurrencyRate
+                rate: response.rates[toCurrency.toUpperCase()]
             })
 
         } catch (error) {
-            throw new HttpException('Could not fetch IRR to EUR rate', HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new HttpException('Could not fetch rate', HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     async fetchCryptoCurrencyRate(fromCurrency: string, toCurrency: string = 'USDT') {
@@ -81,7 +75,7 @@ export class ExchangeRateService {
         const fetchOrGetRate = async (from: string, to: string) => {
             let rate = await this.getRate(from, to);
             if (!rate) {
-                rate = await this.fetchIRRToUsdRate();
+                rate = await this.fetchIrrToUsdRate();
             }
             return rate.rate;
         };
