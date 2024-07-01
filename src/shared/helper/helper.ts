@@ -9,5 +9,5 @@ export function developmentEnv() {
 }
 
 export function productionEnv() {
-    return processEnv() == "production";
+    return processEnv() == "prod";
 }
