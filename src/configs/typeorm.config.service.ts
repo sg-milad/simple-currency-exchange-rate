@@ -11,6 +11,8 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
     }
 
     public createTypeOrmOptions(): TypeOrmModuleOptions {
+        console.log(this.dbConfig);
+
         return {
             type: "postgres",
             host: this.dbConfig.host,
