@@ -26,3 +26,8 @@ please copy and past these commands
 
 and wait a couple of minutes to build the project. after build please open [localhost](http://localhost:300/docs).
 if you don't like using swagger please insert docs-json.json to postman and enjoy.
+
+### Todo
+
+-   implement cache
+-   Make one API to convert all currency(fiat, crypt currency)
