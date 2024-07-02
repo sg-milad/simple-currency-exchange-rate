@@ -24,7 +24,7 @@ please copy and past these commands
 ~ docker compose up
 ```
 
-and wait a couple of minutes to build the project. after build please open [localhost](http://localhost:300/docs).
+and wait a couple of minutes to build the project. after build please open [localhost](http://localhost:3000/docs).
 if you don't like using swagger please insert docs-json.json to postman and enjoy.
 
 ### Todo
